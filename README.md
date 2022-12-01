@@ -11,7 +11,10 @@ A cli demodulation tool: http://kmkeen.com/rtl-demod-guide/
 
 ### GQRX
 graphical spectrum analyzer: http://http://gqrx.dk    
-To install: sudo apt-get install gqrx
+To install: 
+```
+sudo apt-get install gqrx-sdr
+```
 
 ### ACARS DECODER 
 A realtime aircraft message decoding: https://github.com/TLeconte/acarsdec
