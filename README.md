@@ -73,6 +73,9 @@ ADS-B airplane messages DECODER: https://github.com/antirez/dump1090 / https://w
 
 ### RTL_433
 Decoding Low Power devices on unlicensed bands 433MHz/315 MHz/ 868MHz / 915MHz - like keyfobs, meteo/weather stations, sensors sniffer: https://github.com/merbanan/rtl_433
+```
+sudo apt-get install rtl-433
+```
 
 ### MULTIMON-NG
 A multi system DECODER: https://github.com/EliasOenal/multimon-ng
