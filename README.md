@@ -5,9 +5,57 @@ Software Defined Radio using RTL-SDR dongle on Ubuntu Linux
 
 ### RTL-SDR 
 A package for Ubuntu: [[https://launchpad.net/ubuntu/bionic/+...](https://launchpad.net/ubuntu/bionic/+package/rtl-sdr)]
+```
+sudo apt install -y rtl-sdr
+sudo apt install -y sox
+sudo apt install -y multimon-ng
+```
 
 ### RTL_FM 
-A cli demodulation tool: http://kmkeen.com/rtl-demod-guide/
+A cli demodulation tool: 
+http://kmkeen.com/rtl-demod-guide/
+http://main.lv/writeup/rtlsdr_usage.md
+
+Tune in FM Broadcast
+```
+rtl_fm -M wbfm -f 89.1M | play -r 32k -t raw -e s -b 16 -c 1 -V1 -
+```
+'-f ...' indicated the frequency to tune to
+-M fm means narrowband FM
+-s 170k means to sample the radio at 170k/sec
+-A fast uses a fast polynominal approximation of arctangent
+-r 32k means to lowpass/resample at 32kHz
+-l 0 disables squelch
+-E deemp applies a deemphesis filter
+
+Police Scanner
+```
+rtl_fm -M fm -f 154.42M -f 154.75M -f 154.82M -f 154.89M -s 12k -g 50 -l 70 | play -r 12k ...
+```
+-M fm narrowband FM
+-f ... frequency to tune, use multiple times for scanning
+-s 12k sample rate, about as narrow as possible for FM voice
+-g 50 set gain to maximum (use a value appropriate to your dongle)
+-l 70 set squelch to 70. The exact values varies a lot. Changing the gain or sample rate will require a change in the squelch to compensate.
+
+Scan Airband
+```
+rtl_fm -M am -f 118M:137M:25k -s 12k -g 50 -l 280 | play -r 12k ...
+```
+-M am AM demodulation
+-f start:stop:interval a range of frequencies to scan
+-s 12k same as above
+-g 50 same as above
+-l 280 squelch level, exact value varies a lot
+
+Pager Decoder
+```
+rtl_fm -M fm -f 929.77M -s 22050 -g 10 -l 250 | multimon -t raw /dev/stdin
+```
+Scan for signals
+```
+rtl_power -f 76M:108M:125k -i 1 fm_stations.csv
+```
 
 ### GQRX
 graphical spectrum analyzer: http://http://gqrx.dk    
